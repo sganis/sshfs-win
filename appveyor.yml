@@ -27,6 +27,8 @@ test_script:
       ci\mount_sshfs.bat support localhost 22 Z:
       Z:
       cd Z:\tmp
+      echo > test
+      dir
       C:\projects\sshfs-win\ci\testfs.bat
       
 artifacts:
