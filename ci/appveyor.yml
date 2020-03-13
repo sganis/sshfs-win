@@ -23,6 +23,8 @@ test_script:
   - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.20073-x64.msi /qn
   - ps: |
       net use Z: \\sshfs.k\support@localhost\..\..
+      net use /d Z:
+      ci\mount_sshfs.bat
       Z:
       cd Z:\tmp
       C:\projects\sshfs-win\ci\testfs.bat
