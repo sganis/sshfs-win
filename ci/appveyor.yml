@@ -21,7 +21,7 @@ install:
 build_script:
   - git submodule init && git submodule update
   - C:\cygwin64\bin\bash -e -l -c "/cygdrive/c/Program\ Files\ \(x86\)/WinFsp/opt/cygfuse/install.sh"
-  - C:\cygwin64\bin\bash -e -l -c "make -j8" 
+  - C:\cygwin64\bin\bash -e -l -c "cd /cygdrive/c/projects/sshfs-win && make -j8" 
 test_script:
   - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.20073-x64.msi /qn
   - ps: |
