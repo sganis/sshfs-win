@@ -7,7 +7,10 @@ install:
   - appveyor DownloadFile https://github.com/billziss-gh/winfsp/releases/download/v1.6/winfsp-1.6.20027.msi
   - start /wait msiexec /i winfsp-1.6.20027.msi /qn ADDLOCAL=ALL
   # setup cygwin build tools
-  - C:\cygwin64\setup-x86_64.exe -qBqgnNdO -l C:\cygwin64\var\cache\setup -R c:\cygwin64 -s http://cygwin.mirror.constant.com -P gcc-g++,make,automake,patch,vim,git,libglib2.0-devel,cygport,meson >nul
+  - cmd: |
+      C:\cygwin64\setup-x86_64.exe -qBqgnNdO ^
+        -l C:\cygwin64\var\cache\setup -R c:\cygwin64 -s http://cygwin.mirror.constant.com ^
+        -P gcc-g++,make,automake,patch,vim,git,libglib2.0-devel,cygport,meson >nul
    # setup ubuntu in wsl
   - wslconfig /u Ubuntu-18.04
   - rd /s /q C:\WSL\Ubuntu1804
