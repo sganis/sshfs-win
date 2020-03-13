@@ -7,14 +7,14 @@ install:
   - appveyor DownloadFile https://github.com/billziss-gh/winfsp/releases/download/v1.6/winfsp-1.6.20027.msi
   - start /wait msiexec /i winfsp-1.6.20027.msi /qn ADDLOCAL=ALL
   # setup cygwin build tools
-  - C:\cygwin64\setup-x86_64.exe -qBqgnNdO -l C:\cygwin64\var\cache\setup -R c:\cygwin64 -s http://cygwin.mirror.constant.com -P gcc-g++,make,automake,patch,vim,git,libglib2.0-devel,cygport,meson
+  - C:\cygwin64\setup-x86_64.exe -qBqgnNdO -l C:\cygwin64\var\cache\setup -R c:\cygwin64 -s http://cygwin.mirror.constant.com -P gcc-g++,make,automake,patch,vim,git,libglib2.0-devel,cygport,meson >nul
    # setup ubuntu in wsl
   - wslconfig /u Ubuntu-18.04
   - rd /s /q C:\WSL\Ubuntu1804
   - ps: ci\setup_wsl.ps1
   # setup ssh keys
   - C:\Python38\python -m pip install --disable-pip-version-check paramiko pyyaml psutil >NUL
-  - C:\Python38\python ci\setupssh.py support@localhost
+  - C:\Python38\python ci\setupssh.py support@localhost support
 build_script:
   - git submodule init && git submodule update
   - C:\cygwin64\bin\bash -e -l -c "/cygdrive/c/Program\ Files\ \(x86\)/WinFsp/opt/cygfuse/install.sh"
