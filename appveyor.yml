@@ -21,7 +21,7 @@ build_script:
   - C:\cygwin64\bin\bash -e -l -c "cd /cygdrive/c/projects/sshfs-win && make -j8"
 test_script:
   - C:\Python38\python -c "import datetime;print('20'+str(datetime.datetime.now().timetuple().tm_yday).zfill(3))"
-  - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.20073-x64.msi /qn
+  - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.20074-x64.msi /n
   - net use Z: \\sshfs.k\support@localhost\..\..
   - net use /d Z:
   - ci\mount_sshfs.bat support localhost 22 Z:
