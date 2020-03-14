@@ -23,7 +23,7 @@ build_script:
   - ps: $env:BuildNumber = C:\Python38\python -c "import datetime;t=datetime.datetime.now().timetuple();print(f'{t.tm_year-2000}{t.tm_yday:03}')" | Out-String
   # - ps: Get-ChildItem Env:BuildNumber
   - echo BuildNumber=%BuildNumber%
-  - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.%VBuildNumberer%-x64.msi /qn
+  - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.%BuildNumber%-x64.msi /qn
 test_script:
   - ps: |
       net use Z: \\sshfs.k\support@localhost\..\..
