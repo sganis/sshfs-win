@@ -19,6 +19,8 @@ build_script:
   - git submodule init && git submodule update
   - C:\cygwin64\bin\bash -e -l -c "/cygdrive/c/Program\ Files\ \(x86\)/WinFsp/opt/cygfuse/install.sh"
   - C:\cygwin64\bin\bash -e -l -c "cd /cygdrive/c/projects/sshfs-win && make -j8"
+  - ps: Remove-Item -Recurse -Force C:/cygwin
+  - ps: Remove-Item -Recurse -Force C:/cygwin64
   # get BuildNumber
   - ps: $env:BuildNumber = C:\Python38\python -c "import datetime;t=datetime.datetime.now().timetuple();print(f'{t.tm_year-2000}{t.tm_yday:03}')" | Out-String
   # - ps: Get-ChildItem Env:BuildNumber
