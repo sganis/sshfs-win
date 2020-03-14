@@ -28,10 +28,11 @@ test_script:
   - ps: |
       net use Z: \\sshfs.k\support@localhost\..\..
       Z:
-      cd Z:\home
+      cd Z:\tmp
       dir
-      cd support
-      echo > test
+      echo hello > test.txt
+      dir
+      del test.txt
       dir
       C:
       net use /d Z:
@@ -39,7 +40,8 @@ test_script:
       C:\projects\sshfs-win\ci\mount_sshfs.bat support localhost 22 Z:
       Z:
       cd Z:\tmp
-      echo > test
+      dir
+      echo hello > test.txt
       dir
       C:\projects\sshfs-win\ci\testfs.bat    
 artifacts:
