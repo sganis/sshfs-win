@@ -19,8 +19,9 @@ build_script:
   - git submodule init && git submodule update
   - C:\cygwin64\bin\bash -e -l -c "/cygdrive/c/Program\ Files\ \(x86\)/WinFsp/opt/cygfuse/install.sh"
   - C:\cygwin64\bin\bash -e -l -c "cd /cygdrive/c/projects/sshfs-win && make -j8"
-  - ps: $env:BuildNumber = C:\Python38\python -c "import datetime;print('20'+str(datetime.datetime.now().timetuple().tm_yday).zfill(3))" | Out-String
-  - ps: Get-ChildItem Env:BuildNumber
+  # get BuildNumber
+  - ps: $env:BuildNumber = C:\Python38\python -c "import datetime;t=datetime.datetime.now().timetuple();print(f'{t.tm_year-2000}{t.tm_yday:03}')" | Out-String
+  # - ps: Get-ChildItem Env:BuildNumber
   - echo BuildNumber=%BuildNumber%
   - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.%VBuildNumberer%-x64.msi /qn
 test_script:
