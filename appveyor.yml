@@ -19,10 +19,10 @@ build_script:
   - git submodule init && git submodule update
   - C:\cygwin64\bin\bash -e -l -c "/cygdrive/c/Program\ Files\ \(x86\)/WinFsp/opt/cygfuse/install.sh"
   - C:\cygwin64\bin\bash -e -l -c "cd /cygdrive/c/projects/sshfs-win && make -j8"
-  - ps: $env:Ver = C:\Python38\python -c "import datetime;print('20'+str(datetime.datetime.now().timetuple().tm_yday).zfill(3))" | Out-String
-  - ps: Get-ChildItem Env:Ver
-  - echo ver=%Ver%
-  - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.20074-x64.msi /qn
+  - ps: $env:BuildNumber = C:\Python38\python -c "import datetime;print('20'+str(datetime.datetime.now().timetuple().tm_yday).zfill(3))" | Out-String
+  - ps: Get-ChildItem Env:BuildNumber
+  - echo BuildNumber=%BuildNumber%
+  - start /wait msiexec /i  .build\x64\dist\sshfs-win-3.5.%VBuildNumberer%-x64.msi /qn
 test_script:
   - ps: |
       net use Z: \\sshfs.k\support@localhost\..\..
@@ -32,7 +32,7 @@ test_script:
       dir
       net use /d Z:
   - ps: |
-      ci\mount_sshfs.bat support localhost 22 Z:
+      C:\projects\sshfs-win\ci\mount_sshfs.bat support localhost 22 Z:
       Z:
       cd Z:\tmp
       echo > test
