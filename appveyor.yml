@@ -25,6 +25,7 @@ test_script:
   - net use Z: \\sshfs.k\support@localhost\..\..
   - net use /d Z:
   - ci\mount_sshfs.bat support localhost 22 Z:
+  - timeout /t 10
   - ps: |
       Z:
       cd Z:\tmp
